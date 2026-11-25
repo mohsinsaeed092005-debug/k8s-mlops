@@ -1,23 +1,20 @@
 pipeline {
     agent { label 'mlops-wsl' }
 
+    environment {
+        PROJECT_PYTHON = '/home/mohsin/k8s-mlops/pipeline/venv/bin/python'
+    }
+
     options {
         timestamps()
         disableConcurrentBuilds()
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Compile pipeline') {
             steps {
-                sh 'python3 -m venv .venv'
-                sh '.venv/bin/python -m pip install -r pipeline/requirements.txt'
-                sh '.venv/bin/python pipeline/pipeline.py'
+                sh '$PROJECT_PYTHON --version'
+                sh '$PROJECT_PYTHON pipeline/pipeline.py'
             }
         }
 
@@ -30,7 +27,7 @@ pipeline {
                         PF_PID=$!
                         trap 'kill "$PF_PID" 2>/dev/null || true' EXIT
                         sleep 5
-                        .venv/bin/python scripts/run_iris_pipeline.py --host http://127.0.0.1:8888 --timeout 3600
+                        "$PROJECT_PYTHON" scripts/run_iris_pipeline.py --host http://127.0.0.1:8888 --timeout 3600
                     '''
                 }
             }
@@ -45,7 +42,7 @@ pipeline {
                         PF_PID=$!
                         trap 'kill "$PF_PID" 2>/dev/null || true' EXIT
                         sleep 5
-                        .venv/bin/python scripts/promote_model.py iris-model --tracking-uri http://127.0.0.1:5000
+                        "$PROJECT_PYTHON" scripts/promote_model.py iris-model --tracking-uri http://127.0.0.1:5000
                     '''
                 }
             }
