@@ -1,0 +1,23 @@
+# Local Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Terraform working data and state
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.*
+terraform/*.tfplan
+
+# Local MLflow databases and migration backups
+mlflow.db
+mlflow-*.db
+mlflow-volume-backup.tar.gz
+mlflow-deployment-backup.yaml
+
+# Accidental incomplete source copy
+pipeline/pipeline.py\ \ \ \ )
+
+# Local generated data
+mlruns/
