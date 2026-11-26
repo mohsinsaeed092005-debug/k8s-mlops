@@ -1,0 +1,170 @@
+{
+  "dataset": {
+    "source": "data/iris.csv",
+    "enhanced_csv": "data/iris_enhanced.csv",
+    "shape_before": [
+      150,
+      5
+    ],
+    "shape_after": [
+      150,
+      11
+    ],
+    "feature_columns": [
+      "sepal length (cm)",
+      "sepal width (cm)",
+      "petal length (cm)",
+      "petal width (cm)",
+      "sepal area (cm^2)",
+      "petal area (cm^2)",
+      "sepal ratio",
+      "petal ratio",
+      "total length (cm)",
+      "total width (cm)"
+    ],
+    "target_column": "target",
+    "missing_values_after_enhancement": 0
+  },
+  "split": {
+    "train_rows": 120,
+    "test_rows": 30,
+    "stratified": true,
+    "random_state": 42
+  },
+  "old_four_feature_random_forest_baseline": {
+    "accuracy": 0.9,
+    "precision_macro": 0.9023569023569024,
+    "recall_macro": 0.9,
+    "f1_macro": 0.899749373433584,
+    "confusion_matrix": [
+      [
+        10,
+        0,
+        0
+      ],
+      [
+        0,
+        9,
+        1
+      ],
+      [
+        0,
+        2,
+        8
+      ]
+    ],
+    "classification_report": {
+      "Iris setosa": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 10.0
+      },
+      "Iris versicolor": {
+        "precision": 0.8181818181818182,
+        "recall": 0.9,
+        "f1-score": 0.8571428571428571,
+        "support": 10.0
+      },
+      "Iris virginica": {
+        "precision": 0.8888888888888888,
+        "recall": 0.8,
+        "f1-score": 0.8421052631578947,
+        "support": 10.0
+      },
+      "accuracy": 0.9,
+      "macro avg": {
+        "precision": 0.9023569023569024,
+        "recall": 0.9,
+        "f1-score": 0.899749373433584,
+        "support": 30.0
+      },
+      "weighted avg": {
+        "precision": 0.9023569023569024,
+        "recall": 0.9,
+        "f1-score": 0.8997493734335839,
+        "support": 30.0
+      }
+    }
+  },
+  "candidate_cv_macro_f1": {
+    "random_forest": {
+      "fold_scores": [
+        0.9581699346405229,
+        1.0,
+        0.9581699346405229,
+        0.9581699346405229,
+        0.9153439153439153
+      ],
+      "mean": 0.9579707438530969
+    },
+    "decision_tree": {
+      "fold_scores": [
+        0.9153439153439153,
+        1.0,
+        1.0,
+        0.9581699346405229,
+        0.9153439153439153
+      ],
+      "mean": 0.9577715530656707
+    }
+  },
+  "selected_algorithm": "random_forest",
+  "new_ten_feature_model": {
+    "accuracy": 0.9666666666666667,
+    "precision_macro": 0.9696969696969697,
+    "recall_macro": 0.9666666666666667,
+    "f1_macro": 0.9665831244778612,
+    "confusion_matrix": [
+      [
+        10,
+        0,
+        0
+      ],
+      [
+        0,
+        9,
+        1
+      ],
+      [
+        0,
+        0,
+        10
+      ]
+    ],
+    "classification_report": {
+      "Iris setosa": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 10.0
+      },
+      "Iris versicolor": {
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1-score": 0.9473684210526315,
+        "support": 10.0
+      },
+      "Iris virginica": {
+        "precision": 0.9090909090909091,
+        "recall": 1.0,
+        "f1-score": 0.9523809523809523,
+        "support": 10.0
+      },
+      "accuracy": 0.9666666666666667,
+      "macro avg": {
+        "precision": 0.9696969696969697,
+        "recall": 0.9666666666666667,
+        "f1-score": 0.9665831244778612,
+        "support": 30.0
+      },
+      "weighted avg": {
+        "precision": 0.9696969696969696,
+        "recall": 0.9666666666666667,
+        "f1-score": 0.9665831244778613,
+        "support": 30.0
+      }
+    }
+  },
+  "model_file": "models/iris_best_model.joblib"
+}

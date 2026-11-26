@@ -1,0 +1,6 @@
+$kind: collection
+name: Iris MLOps Demo
+description: Check serving health and request an Iris class prediction from the Minikube model.
+variables:
+  - key: baseUrl
+    value: 'http://127.0.0.1:8082'

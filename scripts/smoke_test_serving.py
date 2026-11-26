@@ -1,4 +1,4 @@
-"""Send one Iris record to a reachable MLflow pyfunc serving endpoint."""
+"""Send a 10-feature Iris record to the serving endpoint and verify its output."""
 
 import argparse
 import json
@@ -12,7 +12,7 @@ def main() -> None:
 
     request = Request(
         f"{args.url.rstrip('/')}/invocations",
-        data=json.dumps({"inputs": [[5.1, 3.5, 1.4, 0.2]]}).encode("utf-8"),
+        data=json.dumps({"inputs": [[5.1, 3.5, 1.4, 0.2, 17.85, 0.28, 5.1 / 3.5, 7.0, 6.5, 3.7]]}).encode("utf-8"),
         headers={"Content-Type": "application/json"},
         method="POST",
     )
@@ -22,9 +22,14 @@ def main() -> None:
             raise RuntimeError(f"Unexpected HTTP status: {response.status}")
 
     predictions = payload.get("predictions")
-    if predictions is None or len(predictions) != 1:
+    if predictions is None or len(predictions) != 1 or predictions[0] not in (0, 1, 2):
         raise RuntimeError(f"Unexpected response body: {payload}")
-    print(f"HTTP 200; prediction: {predictions[0]}")
+    if len(payload.get("species", [])) != 1 or len(payload.get("confidence", [])) != 1:
+        raise RuntimeError(f"Response is missing species or confidence: {payload}")
+    print(
+        f"HTTP 200; prediction: {payload['species'][0]} ({predictions[0]}), "
+        f"confidence: {payload['confidence'][0]:.3f}"
+    )
 
 
 if __name__ == "__main__":

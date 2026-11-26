@@ -18,6 +18,20 @@ pipeline {
             }
         }
 
+        stage('Build pipeline runtime image') {
+            steps {
+                sh '''
+                    set -eu
+                    minikube -p mlops image build -t iris-pipeline:v1 ./pipeline
+                    minikube -p mlops image save iris-pipeline:v1 - > /tmp/iris-pipeline-v1.tar
+                    for node in mlops-m02 mlops-m03; do
+                        minikube -p mlops cp /tmp/iris-pipeline-v1.tar "$node:/tmp/iris-pipeline-v1.tar"
+                        minikube -p mlops ssh -n "$node" -- sudo ctr -n k8s.io images import /tmp/iris-pipeline-v1.tar
+                    done
+                '''
+            }
+        }
+
         stage('Run Kubeflow pipeline') {
             steps {
                 withCredentials([file(credentialsId: 'mlops-kubeconfig', variable: 'KUBECONFIG')]) {
@@ -50,7 +64,13 @@ pipeline {
 
         stage('Build serving image') {
             steps {
-                sh 'minikube -p mlops image build --all -t iris-serving:latest ./serving'
+                sh '''
+                    set -eu
+                    minikube -p mlops image build -t iris-serving:v3 ./serving
+                    minikube -p mlops ssh -n mlops -- sudo ctr -n k8s.io images export /tmp/iris-serving-v3.tar docker.io/library/iris-serving:v3
+                    minikube -p mlops cp mlops:/tmp/iris-serving-v3.tar /tmp/iris-serving-v3.tar
+                    minikube -p mlops image load /tmp/iris-serving-v3.tar
+                '''
             }
         }
 

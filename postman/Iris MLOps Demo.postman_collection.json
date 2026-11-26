@@ -1,0 +1,74 @@
+{
+  "info": {
+    "name": "Iris MLOps Demo",
+    "description": "Check the enhanced Iris model with 10 features through the Minikube serving API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8082", "type": "string" },
+    { "key": "sepal_length", "value": "5.1", "type": "string" },
+    { "key": "sepal_width", "value": "3.5", "type": "string" },
+    { "key": "petal_length", "value": "1.4", "type": "string" },
+    { "key": "petal_width", "value": "0.2", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "GET - Serving health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] },
+        "description": "Checks that the Iris model server is responding. No request body is needed."
+      },
+      "event": [
+        { "listen": "test", "script": { "type": "text/javascript", "exec": ["pm.test('Health endpoint returns HTTP 200', function () {", "  pm.response.to.have.status(200);", "});"] } }
+      ]
+    },
+    {
+      "name": "POST - Iris prediction",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json", "type": "text" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"inputs\": {{iris_inputs}}\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "{{baseUrl}}/invocations", "host": ["{{baseUrl}}"], "path": ["invocations"] },
+        "description": "Change the four measurement variables in the collection. The pre-request script calculates the six engineered features and sends all 10 values."
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const value = (key, fallback) => { const raw = pm.collectionVariables.get(key); return raw === undefined || raw === '' ? fallback : Number(raw); };",
+              "const [sl, sw, pl, pw] = [value('sepal_length', 5.1), value('sepal_width', 3.5), value('petal_length', 1.4), value('petal_width', 0.2)];",
+              "const ratio = (a, b) => b === 0 ? 0 : a / b;",
+              "pm.variables.set('iris_inputs', JSON.stringify([[sl, sw, pl, pw, sl * sw, pl * pw, ratio(sl, sw), ratio(pl, pw), sl + pl, sw + pw]]));"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Prediction endpoint returns HTTP 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Response contains a class, species, and confidence', function () {",
+              "  const body = pm.response.json();",
+              "  pm.expect(body.predictions).to.have.lengthOf(1);",
+              "  pm.expect([0, 1, 2]).to.include(body.predictions[0]);",
+              "  pm.expect(body.species).to.have.lengthOf(1);",
+              "  pm.expect(body.confidence).to.have.lengthOf(1);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

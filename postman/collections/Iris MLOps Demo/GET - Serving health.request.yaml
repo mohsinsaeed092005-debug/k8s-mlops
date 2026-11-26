@@ -1,0 +1,12 @@
+$kind: http-request
+method: GET
+url: '{{baseUrl}}/health'
+order: 1000
+description: Checks that the Iris model server is responding. No request body is needed.
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test('Health endpoint returns HTTP 200', function () {
+        pm.response.to.have.status(200);
+      });

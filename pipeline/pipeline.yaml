@@ -1,7 +1,8 @@
 # PIPELINE DEFINITION
 # Name: iris-pipeline
-# Description: Load Data -> Train -> Evaluate -> Register Model
+# Description: Engineer 10 Iris features -> Train -> Evaluate -> Register
 # Inputs:
+#    data_csv_b64: str [Default: 'c2VwYWwgbGVuZ3RoIChjbSksc2VwYWwgd2lkdGggKGNtKSxwZXRhbCBsZW5ndGggKGNtKSxwZXRhbCB3aWR0aCAoY20pLHRhcmdldAo1LjEsMy41LDEuNCwwLjIsMAo0LjksMy4wLDEuNCwwLjIsMAo0LjcsMy4yLDEuMywwLjIsMAo0LjYsMy4xLDEuNSwwLjIsMAo1LjAsMy42LDEuNCwwLjIsMAo1LjQsMy45LDEuNywwLjQsMAo0LjYsMy40LDEuNCwwLjMsMAo1LjAsMy40LDEuNSwwLjIsMAo0LjQsMi45LDEuNCwwLjIsMAo0LjksMy4xLDEuNSwwLjEsMAo1LjQsMy43LDEuNSwwLjIsMAo0LjgsMy40LDEuNiwwLjIsMAo0LjgsMy4wLDEuNCwwLjEsMAo0LjMsMy4wLDEuMSwwLjEsMAo1LjgsNC4wLDEuMiwwLjIsMAo1LjcsNC40LDEuNSwwLjQsMAo1LjQsMy45LDEuMywwLjQsMAo1LjEsMy41LDEuNCwwLjMsMAo1LjcsMy44LDEuNywwLjMsMAo1LjEsMy44LDEuNSwwLjMsMAo1LjQsMy40LDEuNywwLjIsMAo1LjEsMy43LDEuNSwwLjQsMAo0LjYsMy42LDEuMCwwLjIsMAo1LjEsMy4zLDEuNywwLjUsMAo0LjgsMy40LDEuOSwwLjIsMAo1LjAsMy4wLDEuNiwwLjIsMAo1LjAsMy40LDEuNiwwLjQsMAo1LjIsMy41LDEuNSwwLjIsMAo1LjIsMy40LDEuNCwwLjIsMAo0LjcsMy4yLDEuNiwwLjIsMAo0LjgsMy4xLDEuNiwwLjIsMAo1LjQsMy40LDEuNSwwLjQsMAo1LjIsNC4xLDEuNSwwLjEsMAo1LjUsNC4yLDEuNCwwLjIsMAo0LjksMy4xLDEuNSwwLjIsMAo1LjAsMy4yLDEuMiwwLjIsMAo1LjUsMy41LDEuMywwLjIsMAo0LjksMy42LDEuNCwwLjEsMAo0LjQsMy4wLDEuMywwLjIsMAo1LjEsMy40LDEuNSwwLjIsMAo1LjAsMy41LDEuMywwLjMsMAo0LjUsMi4zLDEuMywwLjMsMAo0LjQsMy4yLDEuMywwLjIsMAo1LjAsMy41LDEuNiwwLjYsMAo1LjEsMy44LDEuOSwwLjQsMAo0LjgsMy4wLDEuNCwwLjMsMAo1LjEsMy44LDEuNiwwLjIsMAo0LjYsMy4yLDEuNCwwLjIsMAo1LjMsMy43LDEuNSwwLjIsMAo1LjAsMy4zLDEuNCwwLjIsMAo3LjAsMy4yLDQuNywxLjQsMQo2LjQsMy4yLDQuNSwxLjUsMQo2LjksMy4xLDQuOSwxLjUsMQo1LjUsMi4zLDQuMCwxLjMsMQo2LjUsMi44LDQuNiwxLjUsMQo1LjcsMi44LDQuNSwxLjMsMQo2LjMsMy4zLDQuNywxLjYsMQo0LjksMi40LDMuMywxLjAsMQo2LjYsMi45LDQuNiwxLjMsMQo1LjIsMi43LDMuOSwxLjQsMQo1LjAsMi4wLDMuNSwxLjAsMQo1LjksMy4wLDQuMiwxLjUsMQo2LjAsMi4yLDQuMCwxLjAsMQo2LjEsMi45LDQuNywxLjQsMQo1LjYsMi45LDMuNiwxLjMsMQo2LjcsMy4xLDQuNCwxLjQsMQo1LjYsMy4wLDQuNSwxLjUsMQo1LjgsMi43LDQuMSwxLjAsMQo2LjIsMi4yLDQuNSwxLjUsMQo1LjYsMi41LDMuOSwxLjEsMQo1LjksMy4yLDQuOCwxLjgsMQo2LjEsMi44LDQuMCwxLjMsMQo2LjMsMi41LDQuOSwxLjUsMQo2LjEsMi44LDQuNywxLjIsMQo2LjQsMi45LDQuMywxLjMsMQo2LjYsMy4wLDQuNCwxLjQsMQo2LjgsMi44LDQuOCwxLjQsMQo2LjcsMy4wLDUuMCwxLjcsMQo2LjAsMi45LDQuNSwxLjUsMQo1LjcsMi42LDMuNSwxLjAsMQo1LjUsMi40LDMuOCwxLjEsMQo1LjUsMi40LDMuNywxLjAsMQo1LjgsMi43LDMuOSwxLjIsMQo2LjAsMi43LDUuMSwxLjYsMQo1LjQsMy4wLDQuNSwxLjUsMQo2LjAsMy40LDQuNSwxLjYsMQo2LjcsMy4xLDQuNywxLjUsMQo2LjMsMi4zLDQuNCwxLjMsMQo1LjYsMy4wLDQuMSwxLjMsMQo1LjUsMi41LDQuMCwxLjMsMQo1LjUsMi42LDQuNCwxLjIsMQo2LjEsMy4wLDQuNiwxLjQsMQo1LjgsMi42LDQuMCwxLjIsMQo1LjAsMi4zLDMuMywxLjAsMQo1LjYsMi43LDQuMiwxLjMsMQo1LjcsMy4wLDQuMiwxLjIsMQo1LjcsMi45LDQuMiwxLjMsMQo2LjIsMi45LDQuMywxLjMsMQo1LjEsMi41LDMuMCwxLjEsMQo1LjcsMi44LDQuMSwxLjMsMQo2LjMsMy4zLDYuMCwyLjUsMgo1LjgsMi43LDUuMSwxLjksMgo3LjEsMy4wLDUuOSwyLjEsMgo2LjMsMi45LDUuNiwxLjgsMgo2LjUsMy4wLDUuOCwyLjIsMgo3LjYsMy4wLDYuNiwyLjEsMgo0LjksMi41LDQuNSwxLjcsMgo3LjMsMi45LDYuMywxLjgsMgo2LjcsMi41LDUuOCwxLjgsMgo3LjIsMy42LDYuMSwyLjUsMgo2LjUsMy4yLDUuMSwyLjAsMgo2LjQsMi43LDUuMywxLjksMgo2LjgsMy4wLDUuNSwyLjEsMgo1LjcsMi41LDUuMCwyLjAsMgo1LjgsMi44LDUuMSwyLjQsMgo2LjQsMy4yLDUuMywyLjMsMgo2LjUsMy4wLDUuNSwxLjgsMgo3LjcsMy44LDYuNywyLjIsMgo3LjcsMi42LDYuOSwyLjMsMgo2LjAsMi4yLDUuMCwxLjUsMgo2LjksMy4yLDUuNywyLjMsMgo1LjYsMi44LDQuOSwyLjAsMgo3LjcsMi44LDYuNywyLjAsMgo2LjMsMi43LDQuOSwxLjgsMgo2LjcsMy4zLDUuNywyLjEsMgo3LjIsMy4yLDYuMCwxLjgsMgo2LjIsMi44LDQuOCwxLjgsMgo2LjEsMy4wLDQuOSwxLjgsMgo2LjQsMi44LDUuNiwyLjEsMgo3LjIsMy4wLDUuOCwxLjYsMgo3LjQsMi44LDYuMSwxLjksMgo3LjksMy44LDYuNCwyLjAsMgo2LjQsMi44LDUuNiwyLjIsMgo2LjMsMi44LDUuMSwxLjUsMgo2LjEsMi42LDUuNiwxLjQsMgo3LjcsMy4wLDYuMSwyLjMsMgo2LjMsMy40LDUuNiwyLjQsMgo2LjQsMy4xLDUuNSwxLjgsMgo2LjAsMy4wLDQuOCwxLjgsMgo2LjksMy4xLDUuNCwyLjEsMgo2LjcsMy4xLDUuNiwyLjQsMgo2LjksMy4xLDUuMSwyLjMsMgo1LjgsMi43LDUuMSwxLjksMgo2LjgsMy4yLDUuOSwyLjMsMgo2LjcsMy4zLDUuNywyLjUsMgo2LjcsMy4wLDUuMiwyLjMsMgo2LjMsMi41LDUuMCwxLjksMgo2LjUsMy4wLDUuMiwyLjAsMgo2LjIsMy40LDUuNCwyLjMsMgo1LjksMy4wLDUuMSwxLjgsMgo=']
 #    model_name: str [Default: 'iris-model']
 #    n_estimators: int [Default: 100.0]
 #    tracking_uri: str [Default: 'http://mlflow.mlops.svc.cluster.local:5000']
@@ -31,6 +32,10 @@ components:
           parameterType: NUMBER_DOUBLE
   comp-load-data:
     executorLabel: exec-load-data
+    inputDefinitions:
+      parameters:
+        data_csv_b64:
+          parameterType: STRING
     outputDefinitions:
       artifacts:
         test_data:
@@ -86,14 +91,6 @@ deploymentSpec:
         - evaluate
         command:
         - sh
-        - -c
-        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
-          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
-          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.7.0'\
-          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"'  &&\
-          \  python3 -m pip install --quiet --no-warn-script-location 'scikit-learn==1.5.2'\
-          \ 'pandas==2.2.3' 'joblib' && \"$0\" \"$@\"\n"
-        - sh
         - -ec
         - 'program_path=$(mktemp -d)
 
@@ -104,14 +101,24 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef evaluate(\n    model_in: Input[Model],\n    test_data: Input[Dataset],\n\
-          \    metrics: Output[Metrics]\n) -> float:\n    import joblib\n    import\
-          \ pandas as pd\n    from sklearn.metrics import accuracy_score\n\n    model\
-          \ = joblib.load(model_in.path)\n    df = pd.read_csv(test_data.path)\n\n\
-          \    acc = float(\n        accuracy_score(\n            df[\"target\"],\n\
-          \            model.predict(df.drop(columns=\"target\"))\n        )\n   \
-          \ )\n\n    metrics.log_metric(\"accuracy\", acc)\n    return acc\n\n"
-        image: python:3.11
+          \ *\n\ndef evaluate(model_in: Input[Model], test_data: Input[Dataset], metrics:\
+          \ Output[Metrics]) -> float:\n    import joblib\n    import pandas as pd\n\
+          \    from sklearn.metrics import (\n        accuracy_score, classification_report,\
+          \ confusion_matrix,\n        f1_score, precision_score, recall_score,\n\
+          \    )\n\n    model = joblib.load(model_in.path)\n    df = pd.read_csv(test_data.path)\n\
+          \    X, y = df.drop(columns=\"target\"), df[\"target\"]\n    predicted =\
+          \ model.predict(X)\n    accuracy = float(accuracy_score(y, predicted))\n\
+          \    metrics.log_metric(\"accuracy\", accuracy)\n    metrics.log_metric(\"\
+          precision_macro\", float(precision_score(y, predicted, average=\"macro\"\
+          , zero_division=0)))\n    metrics.log_metric(\"recall_macro\", float(recall_score(y,\
+          \ predicted, average=\"macro\", zero_division=0)))\n    metrics.log_metric(\"\
+          f1_macro\", float(f1_score(y, predicted, average=\"macro\", zero_division=0)))\n\
+          \    print(\"Confusion matrix (classes 0, 1, 2):\\n\", confusion_matrix(y,\
+          \ predicted, labels=[0, 1, 2]))\n    print(\"Classification report:\\n\"\
+          , classification_report(y, predicted, labels=[0, 1, 2], target_names=[\"\
+          setosa\", \"versicolor\", \"virginica\"], zero_division=0))\n    return\
+          \ accuracy\n\n"
+        image: iris-pipeline:v1
     exec-load-data:
       container:
         args:
@@ -121,14 +128,6 @@ deploymentSpec:
         - load_data
         command:
         - sh
-        - -c
-        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
-          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
-          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.7.0'\
-          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"'  &&\
-          \  python3 -m pip install --quiet --no-warn-script-location 'scikit-learn==1.5.2'\
-          \ 'pandas==2.2.3' && \"$0\" \"$@\"\n"
-        - sh
         - -ec
         - 'program_path=$(mktemp -d)
 
@@ -139,14 +138,32 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef load_data(train_data: Output[Dataset], test_data: Output[Dataset]):\n\
-          \    from sklearn.datasets import load_iris\n    from sklearn.model_selection\
-          \ import train_test_split\n\n    df = load_iris(as_frame=True).frame.dropna().drop_duplicates()\n\
-          \n    train, test = train_test_split(\n        df,\n        test_size=0.2,\n\
-          \        random_state=42,\n        stratify=df[\"target\"]\n    )\n\n  \
-          \  train.to_csv(train_data.path, index=False)\n    test.to_csv(test_data.path,\
+          \ *\n\ndef load_data(data_csv_b64: str, train_data: Output[Dataset], test_data:\
+          \ Output[Dataset]):\n    \"\"\"Read the checked-in data, engineer features,\
+          \ then make a stratified split.\"\"\"\n    import base64\n    import io\n\
+          \n    import numpy as np\n    import pandas as pd\n    from sklearn.model_selection\
+          \ import train_test_split\n\n    raw_columns = [\n        \"sepal length\
+          \ (cm)\",\n        \"sepal width (cm)\",\n        \"petal length (cm)\"\
+          ,\n        \"petal width (cm)\",\n    ]\n    csv_bytes = base64.b64decode(data_csv_b64)\n\
+          \    df = pd.read_csv(io.BytesIO(csv_bytes))\n    for column in raw_columns\
+          \ + [\"target\"]:\n        df[column] = pd.to_numeric(df[column], errors=\"\
+          coerce\")\n    df = df.dropna(subset=[\"target\"]).copy()\n    df[\"sepal\
+          \ area (cm^2)\"] = df[raw_columns[0]] * df[raw_columns[1]]\n    df[\"petal\
+          \ area (cm^2)\"] = df[raw_columns[2]] * df[raw_columns[3]]\n    # Use zero\
+          \ for ratios with a zero denominator; missing input remains missing\n  \
+          \  # and is imputed from training data only in the model pipeline.\n   \
+          \ df[\"sepal ratio\"] = np.divide(\n        df[raw_columns[0]].to_numpy(float),\
+          \ df[raw_columns[1]].to_numpy(float),\n        out=np.zeros(len(df), dtype=float),\
+          \ where=df[raw_columns[1]].to_numpy(float) != 0,\n    )\n    df[\"petal\
+          \ ratio\"] = np.divide(\n        df[raw_columns[2]].to_numpy(float), df[raw_columns[3]].to_numpy(float),\n\
+          \        out=np.zeros(len(df), dtype=float), where=df[raw_columns[3]].to_numpy(float)\
+          \ != 0,\n    )\n    df[\"total length (cm)\"] = df[raw_columns[0]] + df[raw_columns[2]]\n\
+          \    df[\"total width (cm)\"] = df[raw_columns[1]] + df[raw_columns[3]]\n\
+          \    df[\"target\"] = df[\"target\"].astype(int)\n\n    train, test = train_test_split(\n\
+          \        df, test_size=0.2, random_state=42, stratify=df[\"target\"]\n \
+          \   )\n    train.to_csv(train_data.path, index=False)\n    test.to_csv(test_data.path,\
           \ index=False)\n\n"
-        image: python:3.11
+        image: iris-pipeline:v1
     exec-register-model:
       container:
         args:
@@ -156,14 +173,6 @@ deploymentSpec:
         - register_model
         command:
         - sh
-        - -c
-        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
-          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
-          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.7.0'\
-          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"'  &&\
-          \  python3 -m pip install --quiet --no-warn-script-location 'mlflow==3.18.0'\
-          \ 'scikit-learn==1.5.2' 'pandas==2.2.3' 'joblib' && \"$0\" \"$@\"\n"
-        - sh
         - -ec
         - 'program_path=$(mktemp -d)
 
@@ -174,27 +183,24 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef register_model(\n    model_in: Input[Model],\n    accuracy: float,\n\
-          \    tracking_uri: str,\n    model_name: str\n):\n    import joblib\n  \
-          \  import mlflow\n    import mlflow.sklearn\n    from mlflow.tracking import\
-          \ MlflowClient\n\n    mlflow.set_tracking_uri(tracking_uri)\n    mlflow.set_experiment(\"\
-          iris\")\n\n    model = joblib.load(model_in.path)\n\n    with mlflow.start_run():\n\
-          \        mlflow.log_metric(\"accuracy\", accuracy)\n\n        mlflow.sklearn.log_model(\n\
-          \            model,\n            name=\"model\",\n            registered_model_name=model_name,\n\
-          \            skops_trusted_types=[\"sklearn.tree._tree.Tree\"]\n       \
-          \ )\n\n    client = MlflowClient()\n\n    versions = client.search_model_versions(\n\
-          \        f\"name='{model_name}'\"\n    )\n\n    v = str(max(int(x.version)\
-          \ for x in versions))\n\n    try:\n        client.transition_model_version_stage(\n\
-          \            model_name, v, \"Staging\"\n        )\n        client.transition_model_version_stage(\n\
-          \            model_name, v, \"Production\"\n        )\n\n        print(f\"\
-          Version {v} moved to Production (stage)\")\n\n    except Exception as e:\n\
-          \        print(\"Stage transition unavailable; assigning registry aliases:\"\
-          , e)\n\n    # MLflow stages are legacy; serving consumes the stable production\
-          \ alias.\n    client.set_registered_model_alias(model_name, \"staging\"\
-          , v)\n    client.set_registered_model_alias(model_name, \"production\",\
-          \ v)\n    print(f\"Aliases staging and production now point to version {v}\"\
-          )\n\n"
-        image: python:3.11
+          \ *\n\ndef register_model(model_in: Input[Model], accuracy: float, tracking_uri:\
+          \ str, model_name: str):\n    import joblib\n    import mlflow\n    import\
+          \ mlflow.sklearn\n    from mlflow.tracking import MlflowClient\n\n    mlflow.set_tracking_uri(tracking_uri)\n\
+          \    mlflow.set_experiment(\"iris\")\n    model = joblib.load(model_in.path)\n\
+          \    with mlflow.start_run():\n        mlflow.log_metric(\"test_accuracy\"\
+          , accuracy)\n        mlflow.sklearn.log_model(\n            model, name=\"\
+          model\", registered_model_name=model_name,\n            skops_trusted_types=[\"\
+          sklearn.tree._tree.Tree\", \"numpy.dtype\"],\n        )\n\n    client =\
+          \ MlflowClient()\n    versions = client.search_model_versions(f\"name='{model_name}'\"\
+          )\n    version = str(max(int(item.version) for item in versions))\n    try:\n\
+          \        client.transition_model_version_stage(model_name, version, \"Staging\"\
+          )\n        client.transition_model_version_stage(model_name, version, \"\
+          Production\")\n    except Exception as error:\n        print(\"Stage transition\
+          \ unavailable; assigning aliases:\", error)\n    client.set_registered_model_alias(model_name,\
+          \ \"staging\", version)\n    client.set_registered_model_alias(model_name,\
+          \ \"production\", version)\n    print(f\"Aliases staging and production\
+          \ now point to version {version}\")\n\n"
+        image: iris-pipeline:v1
     exec-train:
       container:
         args:
@@ -204,14 +210,6 @@ deploymentSpec:
         - train
         command:
         - sh
-        - -c
-        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
-          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
-          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.7.0'\
-          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"'  &&\
-          \  python3 -m pip install --quiet --no-warn-script-location 'scikit-learn==1.5.2'\
-          \ 'pandas==2.2.3' 'joblib' && \"$0\" \"$@\"\n"
-        - sh
         - -ec
         - 'program_path=$(mktemp -d)
 
@@ -222,16 +220,29 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef train(\n    train_data: Input[Dataset],\n    model_out: Output[Model],\n\
-          \    n_estimators: int = 100\n):\n    import joblib\n    import pandas as\
-          \ pd\n    from sklearn.ensemble import RandomForestClassifier\n\n    df\
-          \ = pd.read_csv(train_data.path)\n    X, y = df.drop(columns=\"target\"\
-          ), df[\"target\"]\n\n    clf = RandomForestClassifier(\n        n_estimators=n_estimators,\n\
-          \        random_state=42\n    ).fit(X, y)\n\n    joblib.dump(clf, model_out.path)\n\
-          \n"
-        image: python:3.11
+          \ *\n\ndef train(train_data: Input[Dataset], model_out: Output[Model], n_estimators:\
+          \ int = 100):\n    \"\"\"Select RF or Decision Tree by training-only cross\
+          \ validation.\"\"\"\n    import joblib\n    import pandas as pd\n    from\
+          \ sklearn.impute import SimpleImputer\n    from sklearn.model_selection\
+          \ import StratifiedKFold, cross_val_score\n    from sklearn.pipeline import\
+          \ make_pipeline\n    from sklearn.tree import DecisionTreeClassifier\n \
+          \   from sklearn.ensemble import RandomForestClassifier\n\n    df = pd.read_csv(train_data.path)\n\
+          \    X, y = df.drop(columns=\"target\"), df[\"target\"]\n    candidates\
+          \ = {\n        \"random_forest\": RandomForestClassifier(n_estimators=n_estimators,\
+          \ random_state=42),\n        \"decision_tree\": DecisionTreeClassifier(random_state=42),\n\
+          \    }\n    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\n\
+          \    scores = {\n        name: cross_val_score(\n            make_pipeline(SimpleImputer(strategy=\"\
+          median\"), estimator),\n            X, y, cv=cv, scoring=\"f1_macro\",\n\
+          \        ).mean()\n        for name, estimator in candidates.items()\n \
+          \   }\n    best_name = max(scores, key=scores.get)\n    best_model = make_pipeline(\n\
+          \        SimpleImputer(strategy=\"median\"), candidates[best_name]\n   \
+          \ ).fit(X, y)\n    joblib.dump(best_model, model_out.path)\n    model_out.metadata[\"\
+          algorithm\"] = best_name\n    model_out.metadata[\"cv_f1_macro\"] = float(scores[best_name])\n\
+          \    print(f\"Selected {best_name}; CV macro F1={scores[best_name]:.4f};\
+          \ all features={list(X.columns)}\")\n\n"
+        image: iris-pipeline:v1
 pipelineInfo:
-  description: Load Data -> Train -> Evaluate -> Register Model
+  description: Engineer 10 Iris features -> Train -> Evaluate -> Register
   name: iris-pipeline
 root:
   dag:
@@ -267,6 +278,10 @@ root:
           enableCache: true
         componentRef:
           name: comp-load-data
+        inputs:
+          parameters:
+            data_csv_b64:
+              componentInputParameter: data_csv_b64
         taskInfo:
           name: load-data
       register-model:
@@ -314,6 +329,10 @@ root:
           name: train
   inputDefinitions:
     parameters:
+      data_csv_b64:
+        defaultValue: c2VwYWwgbGVuZ3RoIChjbSksc2VwYWwgd2lkdGggKGNtKSxwZXRhbCBsZW5ndGggKGNtKSxwZXRhbCB3aWR0aCAoY20pLHRhcmdldAo1LjEsMy41LDEuNCwwLjIsMAo0LjksMy4wLDEuNCwwLjIsMAo0LjcsMy4yLDEuMywwLjIsMAo0LjYsMy4xLDEuNSwwLjIsMAo1LjAsMy42LDEuNCwwLjIsMAo1LjQsMy45LDEuNywwLjQsMAo0LjYsMy40LDEuNCwwLjMsMAo1LjAsMy40LDEuNSwwLjIsMAo0LjQsMi45LDEuNCwwLjIsMAo0LjksMy4xLDEuNSwwLjEsMAo1LjQsMy43LDEuNSwwLjIsMAo0LjgsMy40LDEuNiwwLjIsMAo0LjgsMy4wLDEuNCwwLjEsMAo0LjMsMy4wLDEuMSwwLjEsMAo1LjgsNC4wLDEuMiwwLjIsMAo1LjcsNC40LDEuNSwwLjQsMAo1LjQsMy45LDEuMywwLjQsMAo1LjEsMy41LDEuNCwwLjMsMAo1LjcsMy44LDEuNywwLjMsMAo1LjEsMy44LDEuNSwwLjMsMAo1LjQsMy40LDEuNywwLjIsMAo1LjEsMy43LDEuNSwwLjQsMAo0LjYsMy42LDEuMCwwLjIsMAo1LjEsMy4zLDEuNywwLjUsMAo0LjgsMy40LDEuOSwwLjIsMAo1LjAsMy4wLDEuNiwwLjIsMAo1LjAsMy40LDEuNiwwLjQsMAo1LjIsMy41LDEuNSwwLjIsMAo1LjIsMy40LDEuNCwwLjIsMAo0LjcsMy4yLDEuNiwwLjIsMAo0LjgsMy4xLDEuNiwwLjIsMAo1LjQsMy40LDEuNSwwLjQsMAo1LjIsNC4xLDEuNSwwLjEsMAo1LjUsNC4yLDEuNCwwLjIsMAo0LjksMy4xLDEuNSwwLjIsMAo1LjAsMy4yLDEuMiwwLjIsMAo1LjUsMy41LDEuMywwLjIsMAo0LjksMy42LDEuNCwwLjEsMAo0LjQsMy4wLDEuMywwLjIsMAo1LjEsMy40LDEuNSwwLjIsMAo1LjAsMy41LDEuMywwLjMsMAo0LjUsMi4zLDEuMywwLjMsMAo0LjQsMy4yLDEuMywwLjIsMAo1LjAsMy41LDEuNiwwLjYsMAo1LjEsMy44LDEuOSwwLjQsMAo0LjgsMy4wLDEuNCwwLjMsMAo1LjEsMy44LDEuNiwwLjIsMAo0LjYsMy4yLDEuNCwwLjIsMAo1LjMsMy43LDEuNSwwLjIsMAo1LjAsMy4zLDEuNCwwLjIsMAo3LjAsMy4yLDQuNywxLjQsMQo2LjQsMy4yLDQuNSwxLjUsMQo2LjksMy4xLDQuOSwxLjUsMQo1LjUsMi4zLDQuMCwxLjMsMQo2LjUsMi44LDQuNiwxLjUsMQo1LjcsMi44LDQuNSwxLjMsMQo2LjMsMy4zLDQuNywxLjYsMQo0LjksMi40LDMuMywxLjAsMQo2LjYsMi45LDQuNiwxLjMsMQo1LjIsMi43LDMuOSwxLjQsMQo1LjAsMi4wLDMuNSwxLjAsMQo1LjksMy4wLDQuMiwxLjUsMQo2LjAsMi4yLDQuMCwxLjAsMQo2LjEsMi45LDQuNywxLjQsMQo1LjYsMi45LDMuNiwxLjMsMQo2LjcsMy4xLDQuNCwxLjQsMQo1LjYsMy4wLDQuNSwxLjUsMQo1LjgsMi43LDQuMSwxLjAsMQo2LjIsMi4yLDQuNSwxLjUsMQo1LjYsMi41LDMuOSwxLjEsMQo1LjksMy4yLDQuOCwxLjgsMQo2LjEsMi44LDQuMCwxLjMsMQo2LjMsMi41LDQuOSwxLjUsMQo2LjEsMi44LDQuNywxLjIsMQo2LjQsMi45LDQuMywxLjMsMQo2LjYsMy4wLDQuNCwxLjQsMQo2LjgsMi44LDQuOCwxLjQsMQo2LjcsMy4wLDUuMCwxLjcsMQo2LjAsMi45LDQuNSwxLjUsMQo1LjcsMi42LDMuNSwxLjAsMQo1LjUsMi40LDMuOCwxLjEsMQo1LjUsMi40LDMuNywxLjAsMQo1LjgsMi43LDMuOSwxLjIsMQo2LjAsMi43LDUuMSwxLjYsMQo1LjQsMy4wLDQuNSwxLjUsMQo2LjAsMy40LDQuNSwxLjYsMQo2LjcsMy4xLDQuNywxLjUsMQo2LjMsMi4zLDQuNCwxLjMsMQo1LjYsMy4wLDQuMSwxLjMsMQo1LjUsMi41LDQuMCwxLjMsMQo1LjUsMi42LDQuNCwxLjIsMQo2LjEsMy4wLDQuNiwxLjQsMQo1LjgsMi42LDQuMCwxLjIsMQo1LjAsMi4zLDMuMywxLjAsMQo1LjYsMi43LDQuMiwxLjMsMQo1LjcsMy4wLDQuMiwxLjIsMQo1LjcsMi45LDQuMiwxLjMsMQo2LjIsMi45LDQuMywxLjMsMQo1LjEsMi41LDMuMCwxLjEsMQo1LjcsMi44LDQuMSwxLjMsMQo2LjMsMy4zLDYuMCwyLjUsMgo1LjgsMi43LDUuMSwxLjksMgo3LjEsMy4wLDUuOSwyLjEsMgo2LjMsMi45LDUuNiwxLjgsMgo2LjUsMy4wLDUuOCwyLjIsMgo3LjYsMy4wLDYuNiwyLjEsMgo0LjksMi41LDQuNSwxLjcsMgo3LjMsMi45LDYuMywxLjgsMgo2LjcsMi41LDUuOCwxLjgsMgo3LjIsMy42LDYuMSwyLjUsMgo2LjUsMy4yLDUuMSwyLjAsMgo2LjQsMi43LDUuMywxLjksMgo2LjgsMy4wLDUuNSwyLjEsMgo1LjcsMi41LDUuMCwyLjAsMgo1LjgsMi44LDUuMSwyLjQsMgo2LjQsMy4yLDUuMywyLjMsMgo2LjUsMy4wLDUuNSwxLjgsMgo3LjcsMy44LDYuNywyLjIsMgo3LjcsMi42LDYuOSwyLjMsMgo2LjAsMi4yLDUuMCwxLjUsMgo2LjksMy4yLDUuNywyLjMsMgo1LjYsMi44LDQuOSwyLjAsMgo3LjcsMi44LDYuNywyLjAsMgo2LjMsMi43LDQuOSwxLjgsMgo2LjcsMy4zLDUuNywyLjEsMgo3LjIsMy4yLDYuMCwxLjgsMgo2LjIsMi44LDQuOCwxLjgsMgo2LjEsMy4wLDQuOSwxLjgsMgo2LjQsMi44LDUuNiwyLjEsMgo3LjIsMy4wLDUuOCwxLjYsMgo3LjQsMi44LDYuMSwxLjksMgo3LjksMy44LDYuNCwyLjAsMgo2LjQsMi44LDUuNiwyLjIsMgo2LjMsMi44LDUuMSwxLjUsMgo2LjEsMi42LDUuNiwxLjQsMgo3LjcsMy4wLDYuMSwyLjMsMgo2LjMsMy40LDUuNiwyLjQsMgo2LjQsMy4xLDUuNSwxLjgsMgo2LjAsMy4wLDQuOCwxLjgsMgo2LjksMy4xLDUuNCwyLjEsMgo2LjcsMy4xLDUuNiwyLjQsMgo2LjksMy4xLDUuMSwyLjMsMgo1LjgsMi43LDUuMSwxLjksMgo2LjgsMy4yLDUuOSwyLjMsMgo2LjcsMy4zLDUuNywyLjUsMgo2LjcsMy4wLDUuMiwyLjMsMgo2LjMsMi41LDUuMCwxLjksMgo2LjUsMy4wLDUuMiwyLjAsMgo2LjIsMy40LDUuNCwyLjMsMgo1LjksMy4wLDUuMSwxLjgsMgo=
+        isOptional: true
+        parameterType: STRING
       model_name:
         defaultValue: iris-model
         isOptional: true

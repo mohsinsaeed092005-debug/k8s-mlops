@@ -23,7 +23,7 @@ spec:
               app: iris-serving
       containers:
         - name: iris-serving
-          image: iris-serving:latest
+          image: iris-serving:v3
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

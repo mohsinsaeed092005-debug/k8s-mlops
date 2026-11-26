@@ -1,7 +1,10 @@
 FROM ghcr.io/mlflow/mlflow:latest
 
-RUN python -m pip install --no-cache-dir scikit-learn==1.5.2
+RUN python -m pip install --no-cache-dir scikit-learn==1.5.2 pandas==2.2.3
+
+WORKDIR /app
+COPY app.py /app/app.py
 
 ENV MLFLOW_TRACKING_URI=http://mlflow.mlops.svc.cluster.local:5000
 
-CMD ["mlflow", "models", "serve", "--model-uri", "models:/iris-model@production", "--host", "0.0.0.0", "--port", "8080", "--env-manager", "local"]
+CMD ["python", "/app/app.py"]
